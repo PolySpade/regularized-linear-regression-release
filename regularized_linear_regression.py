@@ -37,7 +37,7 @@ def poly_feature_transform(X, poly_order=1):
     f_transform = np.ones((N, 1))
 
     for order in range(1, poly_order + 1):
-        f_transform = np.hstack((X ** order,f_transform))
+        f_transform = np.hstack((f_transform, X ** order))
 
     return f_transform
 
