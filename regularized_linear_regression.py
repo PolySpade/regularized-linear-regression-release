@@ -1,6 +1,5 @@
 import numpy as np
 
-
 def compute_RMSE(y_true, y_pred):
     """Computes the Root Mean Squared Error (RMSE) given the ground truth
     values and the predicted values.
@@ -32,9 +31,13 @@ def poly_feature_transform(X, poly_order=1):
         np.ndarray -- A numpy array of shape (N, (D * order) + 1) representing
         the transformed features following the specified `poly_order`
     """
-    f_transform = None
+    # Transform the input features
+    N, D = X.shape
 
-    # TODO: Add features to X until poly_order
+    f_transform = np.ones((N, 1))
+
+    for order in range(1, poly_order + 1):
+        f_transform = np.hstack((X ** order,f_transform))
 
     return f_transform
 
@@ -61,7 +64,7 @@ class UnregularizedLinearRegressor(object):
         """
 
         # TODO: Calculate for the weights using np.polyfit()
-        self.W = np.polyfit(X,y,1)
+        self.W = np.polyfit(X, y, self.degree)
 
         return self.W
 
